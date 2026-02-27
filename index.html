@@ -115,7 +115,14 @@
 
         .exam-location {
             font-size: 13px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .exam-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
         }
 
         .seats {
@@ -130,6 +137,22 @@
         .seats.some {
             color: #0f766e;
         }
+
+        .book-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--surface);
+            background: var(--primary);
+            padding: 4px 10px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .book-link:hover {
+            background: var(--primary-dark);
+        }
     </style>
 </head>
 <body>
@@ -143,6 +166,7 @@
 
 <script>
     const API_URL = 'https://floral-flower-b0c0.bluemle.workers.dev/';
+    const BOOKING_URL = 'https://ssl.education.lu/ve-portal/#/home';
 
     function parseLuxDate(dmy) {
         if (!dmy) return {label: 'Unknown date', sortKey: 0};
@@ -236,7 +260,10 @@
                     <div class="exam-title">${exam.title}</div>
                     <div class="exam-time">Time: ${exam.time} (${exam.ref})</div>
                     <div class="exam-location">${exam.location}</div>
-                    <div class="seats ${seatsClass}">Remaining seats: ${seatsLabel}</div>
+                    <div class="exam-footer">
+                        <div class="seats ${seatsClass}">Remaining seats: ${seatsLabel}</div>
+                        <a class="book-link" href="${BOOKING_URL}" target="_blank" rel="noopener noreferrer">📝 Book exam</a>
+                    </div>
                 `;
                 listEl.appendChild(div);
             });
